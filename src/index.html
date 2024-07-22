@@ -10,19 +10,13 @@
                 --themeAccent: transparent;
                 --themeBorder: transparent;
                 --borderThickness: 8px;
-                --optionHeight: calc((100vh + (var(--borderThickness) * 3)) / 4);
-                --optionContent: calc((100vh - (var(--borderThickness) * 5)) / 4);
-                --optionShift: calc(var(--optionHeight) - var(--borderThickness));
+                --optionHeight: calc((100vh - var(--borderThickness)) / var(--optionCount));
+                --optionContent: calc((100vh - (var(--borderThickness) * (var(--optionCount) + 1))) / var(--optionCount));
+                --optionCount: 0;
             }
             
             .background {
-                background-color: var(--themeBackground);
-            }
-            
-            .border {
-                border-color: var(--themeBorder);
-                border-style: solid;
-                border-width: var(--borderThickness);
+                background: var(--themeBackground);
             }
             
             .centre {
@@ -55,6 +49,20 @@
                 box-sizing: border-box;
                 position: absolute;
                 cursor: pointer;
+                border-left: var(--borderThickness) solid var(--themeBorder);
+                border-right: var(--borderThickness) solid var(--themeBorder);
+                border-bottom: calc(var(--borderThickness) / 2) solid var(--themeBorder);
+                border-top: calc(var(--borderThickness) / 2) solid var(--themeBorder);
+            }
+            
+            .options > .option:first-child {
+                border-top: var(--borderThickness) solid var(--themeBorder);
+                height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
+            }
+            
+            .options > .option:last-child {
+                border-bottom: var(--borderThickness) solid var(--themeBorder);
+                height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
             }
 
             .optionIconDiv {
@@ -98,11 +106,11 @@
         <link rel="icon" type="image/x-icon" href="./icons/favicon.ico">
     </head>
     <body class="background">
-    <ol style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; padding: 0px; margin: 0px;">
-        <li class="option border" style="top: calc(var(--optionShift) * 0)" label="Methods" icon="./icons/cube.path"></li>
-        <li class="option border" style="top: calc(var(--optionShift) * 1)" label="Algorithm Generator" icon="./icons/generate.path"></li>
-        <li class="option border" style="top: calc(var(--optionShift) * 2)" label="Set Builder" icon="./icons/newSet.path"></li>
-        <li class="option border" style="top: calc(var(--optionShift) * 3)" label="Settings" icon="./icons/settings.path"></li>
+    <ol class="options" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; padding: 0px; margin: 0px;">
+        <li class="option" label="Methods" icon="./icons/cube.path"></li>
+        <li class="option" label="Algorithm Generator" icon="./icons/generate.path"></li>
+        <li class="option" label="Set Builder" icon="./icons/newSet.path"></li>
+        <li class="option" label="Settings" icon="./icons/settings.path"></li>
     </ol>
         <script>
             //Initialize themes
@@ -110,7 +118,8 @@
             "themes": {
                 "Dart": {"Background": "#06141f", "Accent": "#b3ff00", "Border": "#3a3a3a"},
                 "Ion": {"Background": "#103337", "Accent": "#53e8d5", "Border": "#5a6473"},
-                "Quicksilver": {"Background": "#7d8390", "Accent": "#f1f6ff", "Border": "#373c47"}
+                "Quicksilver": {"Background": "#7d8390", "Accent": "#f1f6ff", "Border": "#373c47"},
+                "Test": {"Background": "linear-gradient(218deg, #f00, #00f)", "Accent": "#fff", "Border": "#888"}
             }}
             
             function setTheme(newTheme) { //Set the active theme
@@ -125,7 +134,10 @@
 
             for (let i=0; i<options.length; i++) //For each option
             {
+                document.documentElement.style.setProperty("--optionCount", i+1)
                 let option = options[i]
+                let content = "calc(var(--optionContent) + 1px)"
+                option.style.top = i==0 ? "0px" : `calc((var(--optionHeight) * ${i}) + (var(--borderThickness) / 2))`
 
                 let optionIconDiv = option.appendChild(document.createElement("div"))
                 optionIconDiv.classList.add("optionIconDiv")
@@ -141,7 +153,7 @@
                 colourRect.setAttribute("x", 0)
                 colourRect.setAttribute("y", 0)
                 colourRect.setAttribute("width", "100%")
-                colourRect.setAttribute("height", "100%")
+                colourRect.style.height = content
                 colourRect.setAttribute("mask", `url(#textMask${i})`)
                 colourRect.style.fill = "var(--themeAccent)"
 
@@ -152,7 +164,7 @@
                 maskRect.setAttribute("x", 0)
                 maskRect.setAttribute("y", 0)
                 maskRect.setAttribute("width", "100%")
-                maskRect.setAttribute("height", "100%")
+                maskRect.style.height = content
                 
                 let text = mask.appendChild(document.createElementNS("http://www.w3.org/2000/svg","text"))
                 text.setAttribute("x", "3%")
@@ -171,10 +183,9 @@
                     let colourRect = icon.appendChild(document.createElementNS("http://www.w3.org/2000/svg","rect"))
                     colourRect.setAttribute("x", 0)
                     colourRect.setAttribute("y", 0)
-                    colourRect.setAttribute("width", 1)
-                    colourRect.setAttribute("height", 1)
                     colourRect.setAttribute("mask", `url(#iconMask${i})`)
                     colourRect.style.fill = "var(--themeAccent)"
+                    colourRect.style.height = colourRect.style.width = content
 
                     let mask = icon.appendChild(document.createElementNS("http://www.w3.org/2000/svg","mask"))
                     mask.id = `iconMask${i}`
@@ -182,8 +193,7 @@
                     let maskRect = mask.appendChild(document.createElementNS("http://www.w3.org/2000/svg","rect"))
                     maskRect.setAttribute("x", 0)
                     maskRect.setAttribute("y", 0)
-                    maskRect.setAttribute("width", 1)
-                    maskRect.setAttribute("height", 1)
+                    maskRect.style.height = maskRect.style.width = content
                     
                     let path = mask.appendChild(document.createElementNS("http://www.w3.org/2000/svg","path"))
                     path.attributes.setNamedItem(document.createAttribute("d"))
