@@ -11,8 +11,7 @@ class pathIcon extends HTMLElement {
             {
                 fetch(this.attributes.src.value).then(e=>{return e.text()}).then(text=>{
                     let iconSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-                    iconSVG.classList.add("optionIcon", "centre")
-
+                    
                     iconSVG.setAttribute("viewBox", "0 0 1 1")
 
                     let path = document.createElementNS("http://www.w3.org/2000/svg","path")
@@ -41,6 +40,8 @@ class pathIcon extends HTMLElement {
 
                         mask.appendChild(path)
                     } else {
+                        path.style.fill = "var(--themeAccent)"
+
                         iconSVG.appendChild(path)
                     }
                     this.appendChild(iconSVG)

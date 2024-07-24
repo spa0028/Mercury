@@ -70,6 +70,6 @@ class hotSwapper extends HTMLElement {
 customElements.define('sub-page', subPage);
 customElements.define('hot-swap', hotSwapper);
 
-function hotswap(swapper, target) {
+function hotSwap(swapper, target) {
     document.getElementById(swapper).swap(target)
 }
