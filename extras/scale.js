@@ -4,24 +4,18 @@
 function scalePathData(pathData, scale, precision = 2) {
     // Function to format a number with trailing zeros removed and leading zero removed
     function formatNumber(num) {
-        // Parse the number and remove trailing zeros
         let parsedNum = parseFloat(num);
         if (parsedNum === 0) return '0'; // Special case for zero
         let formattedNum = parsedNum.toFixed(precision).replace(/\.?0+$/, ''); // Remove trailing zeros
-        return formattedNum.replace(/^0+/, ''); // Remove leading zero
+        return formattedNum.replace(/^(-?)0+/, '$1'); // Remove leading zero for negative numbers
     }
 
     // Function to parse and scale a single command in the path data
     function scaleCommand(command, scale, precision) {
-        const commandType = command[0];
-
-        // Scale the coordinates in the command
         return command.replace(/[+-]?\d*\.?\d+(?:e[+-]?\d+)?/gi, (num) => {
-            // Parse the number and scale it
             const parsedNum = parseFloat(num);
-            // Apply the scale factor and format to the specified precision
             const scaledNum = formatNumber((parsedNum * scale).toFixed(precision));
-            return ` ${scaledNum} `; // Add spaces around the scaled number
+            return scaledNum;
         });
     }
 
@@ -34,11 +28,11 @@ function scalePathData(pathData, scale, precision = 2) {
     // Join the scaled commands back into a single string
     let result = scaledCommands.join('').trim();
 
-    // Remove excessive whitespaces and handle spaces between number symbols and letter commands
-    result = result.replace(/\s+/g, ' '); // Convert multiple spaces to a single space
-    result = result.replace(/([a-zA-Z])\s+([+-]?\d)/g, '$1$2'); // Remove space between letter and number
-    result = result.replace(/([+-]?\d)\s+([a-zA-Z])/g, '$1$2'); // Remove space between number and letter
-    result = result.replace(/(\d)\s+(-\d)/g, '$1$2'); // Join positive and negative numbers together
+    // Remove excessive whitespaces and ensure proper formatting
+    result = result.replace(/\s*,\s*/g, ','); // Remove spaces around commas
+    result = result.replace(/([a-zA-Z])\s+/g, '$1'); // Remove space after letters
+    result = result.replace(/\s+([a-zA-Z])/g, '$1'); // Remove space before letters
+    result = result.replace(/([+-]?\d+(\.\d+)?)\s+(-)/g, '$1$3'); // Join number with following negative number
 
     return result;
 }

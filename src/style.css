@@ -1,0 +1,112 @@
+body {
+    overflow: hidden;
+}
+
+:root {
+    --themeBackground: transparent;
+    --themeAccent: transparent;
+    --themeBorder: transparent;
+    --borderThickness: 8px;
+}
+
+.background {
+    background: var(--themeBackground);
+}
+
+.centre {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.vCentre {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1, .optionText {
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    color: var(--themeAccent);
+}
+
+h1 {
+    user-select: none;
+}
+
+.optionText {
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    font-size: 6vw;
+}
+
+menu-option {
+    width: 100%;
+    height: var(--optionHeight);
+    margin: 0px;
+    box-sizing: border-box;
+    position: absolute;
+    cursor: pointer;
+    border-left: var(--borderThickness) solid var(--themeBorder);
+    border-right: var(--borderThickness) solid var(--themeBorder);
+    border-bottom: calc(var(--borderThickness) / 2) solid var(--themeBorder);
+    border-top: calc(var(--borderThickness) / 2) solid var(--themeBorder);
+}
+
+bar-menu > menu-option:first-child {
+    border-top: var(--borderThickness) solid var(--themeBorder);
+    height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
+}
+
+bar-menu > menu-option:last-child {
+    border-bottom: var(--borderThickness) solid var(--themeBorder);
+    height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
+}
+
+.optionIconDiv {
+    height: 100%;
+    width: var(--optionContent);
+    top: 0px;
+    left: 0px;
+    position: relative;
+    border-right-color: var(--themeBorder);
+    border-right-style: solid;
+    border-right-width: var(--borderThickness);
+}
+
+.optionTextDiv {
+    height: var(--optionContent);
+    width: calc(100vw - var(--optionContent) - (var(--borderThickness) * 3));
+    left: calc(var(--optionContent) + var(--borderThickness));
+    position: absolute;
+    top: 0;
+}
+
+.optionIcon {
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+menu-option:hover div svg mask rect {
+    fill: #fff;
+}
+
+menu-option div svg mask path, menu-option div svg mask text {
+    fill: #fff;
+}
+
+menu-option:hover div svg mask path, menu-option:hover div svg mask text {
+        fill: #000;
+}
+
+.headerText {
+    padding-left: 6vw;
+}
+
+header-bar div {
+    border: var(--borderThickness) solid var(--themeBorder);
+}
