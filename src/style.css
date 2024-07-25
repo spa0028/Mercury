@@ -23,13 +23,14 @@ body {
     transform: translateY(-50%);
 }
 
-h1, .optionText {
+h1, h2, .optionText {
     font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
     color: var(--themeAccent);
 }
 
-h1 {
+h1, h2 {
     user-select: none;
+    text-wrap: nowrap;
 }
 
 .optionText {
@@ -69,9 +70,7 @@ bar-menu > menu-option:last-child {
     top: 0px;
     left: 0px;
     position: relative;
-    border-right-color: var(--themeBorder);
-    border-right-style: solid;
-    border-right-width: var(--borderThickness);
+    border-right: var(--borderThickness) solid var(--themeBorder);
 }
 
 .optionTextDiv {
@@ -109,7 +108,6 @@ header-bar div {
     position: absolute;
     box-sizing: border-box;
     background: var(--themePanel);
-    /* border: var(--borderThickness) solid var(--themeBorder); */
 }
 
 header-bar {
@@ -125,4 +123,43 @@ header-bar div path-icon {
     left: 0.5vw;
     position: absolute;
     cursor: pointer;
+}
+
+.subpageBody {
+    position: absolute;
+    top: 8vh;
+    left: 0;
+    width: 100%;
+    height: 92vh;
+}
+
+.settingsSidebar {
+    width: var(--sidebarWidth);
+    height: 100%;
+    border-right: var(--borderThickness) solid var(--themeBorder);
+}
+
+sidebar-item {
+    height: var(--sidebarHeight);
+    position: relative;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+sidebar-item sidebar-item {
+    padding-left: 15%;
+}
+
+sidebar-item div {
+    width: 100%;
+    height: 100%;
+}
+
+sidebar-item div h2 {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    margin: 0;
+    left: 10%;
 }
