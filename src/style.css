@@ -163,3 +163,11 @@ sidebar-item div h2 {
     margin: 0;
     left: 10%;
 }
+
+sidebar-item div path-icon {
+    width: 10%;
+    position: absolute;
+    display: block;
+    top: 50%;
+    transform: translateY(-50%);
+}
