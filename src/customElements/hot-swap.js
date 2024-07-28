@@ -8,7 +8,7 @@ window.hotSwap = (swapper, target) => {
     }
 
     swap(targetName) { //Do a hotswap
-        let target = this.querySelector(`[name="${targetName}"]`)
+        let target = this.querySelector(`[target="${targetName}"]`)
         this.current.hide()
         target.show()
         this.current = target;

@@ -53,7 +53,7 @@
             let icon = optionIconDiv.appendChild(document.createElement("path-icon"))
             icon.setAttribute("src", option.attributes.icon.value)
             icon.attributes.setNamedItem(document.createAttribute("invertable"))
-            icon.load()
+            if (icon.load){icon.load()} //Load icon
         }
     }
 }

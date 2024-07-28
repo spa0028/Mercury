@@ -11,20 +11,16 @@
     }
 
     load() {
-        if (!this.loaded)
+        if (!this.loaded && this.hasAttribute("target"))
         {
-            const src = this.getAttribute('src');
-            console.log(src)
-            if (src) {
-                fetch(src)
-                    .then(response => response.text())
-                    .then(text => {
-                        console.log(text)
-                        this.innerHTML = text;
-                        this.runScripts()
-                        this.loaded = true;
-                    });
-            }
+            let target = this.getAttribute('target');
+            fetch(`pages/${target}.html`)
+                .then(response => response.text())
+                .then(text => {
+                    this.innerHTML = text;
+                    this.runScripts()
+                    this.loaded = true;
+                });
         }
     }
 

@@ -17,6 +17,7 @@ document.addEventListener("keydown", e => {
         }
         let backButton = mainDiv.appendChild(document.createElement("path-icon"))
         backButton.setAttribute("src", "icons/back.path")
+        if (backButton.load){backButton.load()} //Load icon
         backButton.onclick = (()=>{hotSwap("mainSwap", "menu")})
     }
 }

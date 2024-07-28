@@ -58,6 +58,7 @@
                 {
                     let arrow = mainDiv.appendChild(document.createElement("path-icon")) //Create the arrow icon
                     arrow.setAttribute("src", "icons/dropdown.path") //Set the path to the arrow icon
+                    if (arrow.load){arrow.load()} //Load icon
                 }
 
                 let labelText = mainDiv.appendChild(document.createElement("h2")) //Create the label text element
