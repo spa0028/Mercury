@@ -1,3 +1,11 @@
+//This element acts as a link to another HTML document
+//It is different to an iframe because the child document merges with the parent
+//In an iframe the child document is more sandboxed and the css doesn't normally leak from the parent to child
+//But for a sub-page it embeds directly and shouldn't even contain <html> or <body>
+
+//The target attribute defines what page it points to
+//For example "test" points to "pages/test.html"
+
 ;class subPage extends HTMLElement {
     constructor() {
         super(); //Initalize the html element
@@ -10,7 +18,7 @@
         }
     }
 
-    load() {
+    load() { //Load in the target HTML document
         if (!this.loaded && this.hasAttribute("target"))
         {
             let target = this.getAttribute('target');

@@ -12,11 +12,15 @@ function importCustomElement(node) { //Import the script associated with a custo
         {
             registeredElements.push(customTag) //Add to list of already registered element tags
             fetch(`customElements/${customTag}.js`).then(e=>{return e.text()}).then(text=>{ //Fetch the script
-                let split = text.split(";class") //Split the script on "class" to seperate the initalising code from the actual class
+
+                //Split the script on ";class" to seperate the initalising code from the actual class
+                //The semicolon is put there to differenciate between other uses of the word class like inside comments and variable names
+                let split = text.split(";class")
+
                 if (split.length!==2)
-                    {
-                        console.error(`Invalid script for custom element ${customTag}`)
-                    }
+                {
+                    console.error(`Invalid script for custom element ${customTag}`)
+                }
                 eval(split[0]) //Run initalizer code
                 customClass = eval(`(class${split[1]})`) //Get the class
                 customElements.define(customTag, customClass) //Define the custom element
@@ -25,7 +29,7 @@ function importCustomElement(node) { //Import the script associated with a custo
         }
     }
 
-    //Rescan
+    //Scan children
     node.querySelectorAll('*').forEach(importCustomElement);
 }
 

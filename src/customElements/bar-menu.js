@@ -1,4 +1,8 @@
-//Bar menu
+//Vertical bar menu element with icons
+//Used for the main menu
+
+//Put divs inside with label attributes and icon attributes to create options
+
 ;class barMenu extends HTMLElement {
     constructor() {
         super()

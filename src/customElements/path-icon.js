@@ -1,8 +1,9 @@
 //This code defines the icon element which is used for displaying SVG paths
-//Icons can be created with the "path-icon" tag
+
 //The icon then needs the attribute "src" with the value being a file path to the SVG path file
 //The file with the .path extension is a custom file format
 //Path files contain contain the raw commands found inside the d attribute of a path element inside an SVG
+//The attribute "Invertable" may be used to make a mask inside the SVG for dynamically inverting the alpha channel
 
 var globalIconCount = 0;
 var pathCache = {}

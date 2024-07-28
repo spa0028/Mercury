@@ -1,3 +1,8 @@
+//A simple header bar for pages
+
+//Just provide a label attribute to set the header text
+//The back button or pressing escape swaps to the main menu
+
 document.addEventListener("keydown", e => {
     if (e.key=="Escape")
     {

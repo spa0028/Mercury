@@ -1,3 +1,4 @@
+/* Global Classes */
 body {
     overflow: hidden;
 }
@@ -32,6 +33,10 @@ h1, h2 {
     user-select: none;
     text-wrap: nowrap;
 }
+
+
+
+/* Bar Menu */
 
 .optionText {
     width: 100%;
@@ -93,6 +98,10 @@ bar-menu > div:hover div svg mask path, bar-menu > div:hover div svg mask text {
         fill: #000;
 }
 
+
+
+/* Header Bar*/
+
 header-bar div h1 {
     left: 50%;
     transform: translate(-50%, -50%);
@@ -124,6 +133,10 @@ header-bar div path-icon {
     cursor: pointer;
 }
 
+
+
+/* Sub Page*/
+
 .subpageBody {
     position: absolute;
     top: 8vh;
@@ -131,6 +144,11 @@ header-bar div path-icon {
     width: 100%;
     height: 92vh;
 }
+
+
+
+
+/* Side Bar */
 
 .settingsSidebar {
     width: var(--sidebarWidth);
