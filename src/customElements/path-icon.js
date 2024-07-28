@@ -1,8 +1,14 @@
+//This code defines the icon element which is used for displaying SVG paths
+//Icons can be created with the "path-icon" tag
+//The icon then needs the attribute "src" with the value being a file path to the SVG path file
+//The file with the .path extension is a custom file format
+//Path files contain contain the raw commands found inside the d attribute of a path element inside an SVG
+
 var globalIconCount = 0;
 var pathCache = {}
 var waitingFor = {}
 
-class pathIcon extends HTMLElement {
+;class pathIcon extends HTMLElement {
     constructor() {
         super()
         this.load()
@@ -71,5 +77,3 @@ class pathIcon extends HTMLElement {
         this.appendChild(iconSVG)
     }
 }
-
-customElements.define("path-icon", pathIcon)

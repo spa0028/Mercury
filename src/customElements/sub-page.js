@@ -1,10 +1,12 @@
-class subPage extends HTMLElement {
+;class subPage extends HTMLElement {
     constructor() {
         super(); //Initalize the html element
         this.loaded = false;
-        if (this.parentElement.tagName=="hot-swap")
+        if (this.parentElement.tagName.toLowerCase()=="hot-swap" && !this.hasAttribute("default"))
         {
-            this.hide() //Hide if inside a hot swapper
+            this.hide() //Hide if inside a hot swapper but not default
+        } else if (this.hasAttribute("default") || this.hasAttribute("instant")) {
+            this.load() //Load if instant or default
         }
     }
 
@@ -16,6 +18,7 @@ class subPage extends HTMLElement {
                 fetch(src)
                     .then(response => response.text())
                     .then(text => {
+                        console.log(text)
                         this.innerHTML = text;
                         this.runScripts()
                         this.loaded = true;
@@ -47,29 +50,4 @@ class subPage extends HTMLElement {
         this.load()
         this.style.display = "block";
     }
-}
-
-class hotSwapper extends HTMLElement {
-    constructor() {
-        super();
-        this.current = this.querySelector(`sub-page[default]`)
-        if (this.current)
-        {  
-            this.current.show() //Show the default page
-        }
-    }
-
-    swap(targetName) { //Do a hotswap
-        let target = this.querySelector(`[name="${targetName}"]`)
-        this.current.hide()
-        target.show()
-        this.current = target;
-    }
-}
-
-customElements.define('sub-page', subPage);
-customElements.define('hot-swap', hotSwapper);
-
-function hotSwap(swapper, target) {
-    document.getElementById(swapper).swap(target)
 }

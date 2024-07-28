@@ -94,10 +94,9 @@ menu-option:hover div svg mask path, menu-option:hover div svg mask text {
 }
 
 header-bar div h1 {
-    /* padding-left: 9vw; */
     left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
+    transform: translate(-50%, -50%);
+    top: 50%;
     position: absolute;
     margin: 0;
 }
@@ -147,21 +146,31 @@ sidebar-item {
     box-sizing: border-box;
 }
 sidebar-item sidebar-item {
-    padding-left: 15%;
+    padding-left: var(--sidebarIndent);
 }
 
 sidebar-item div {
     width: 100%;
     height: 100%;
+    cursor: pointer;
+}
+
+sidebar-item > div:first-child:hover {
+    background-color: var(--themeHighlight);
 }
 
 sidebar-item div h2 {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer;
     margin: 0;
-    left: 10%;
+    left: var(--sidebarTextInset);
+    width: calc(100% - var(--sidebarTextInset));
+}
+
+sidebar-item.leaf div h2 {
+    left: var(--sidebarLeafTextInset);
+    width: calc(100% - var(--sidebarLeafTextInset));
 }
 
 sidebar-item div path-icon {

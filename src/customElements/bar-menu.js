@@ -1,7 +1,8 @@
-class barMenu extends HTMLElement {
+//Bar menu
+;class barMenu extends HTMLElement {
     constructor() {
         super()
-        let options = this.querySelectorAll("menu-option")
+        let options = this.querySelectorAll("div")
 
         for (let i=0; i<options.length; i++) //For each option
         {
@@ -56,5 +57,3 @@ class barMenu extends HTMLElement {
         }
     }
 }
-
-customElements.define("bar-menu", barMenu)
