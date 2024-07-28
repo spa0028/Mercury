@@ -8,20 +8,17 @@ var registeredElements = [] //Custom elements that have been marked as either im
 function importCustomElement(node) { //Import the script associated with a custom element
     if (node.tagName.includes('-')) { //If it is a custom element
         let customTag = node.tagName.toLowerCase()
-        // console.log(customTag)
         if (!registeredElements.includes(customTag)) //Check to make sure the element hasn't already been imported or is being imported
         {
             registeredElements.push(customTag) //Add to list of already registered element tags
             fetch(`customElements/${customTag}.js`).then(e=>{return e.text()}).then(text=>{ //Fetch the script
-                // console.log(text)
                 let split = text.split(";class") //Split the script on "class" to seperate the initalising code from the actual class
+                if (split.length!==2)
+                    {
+                        console.error(`Invalid script for custom element ${customTag}`)
+                    }
                 eval(split[0]) //Run initalizer code
-                // console.log(split)
-                try {
                 customClass = eval(`(class${split[1]})`) //Get the class
-                } catch (e) {
-                    console.warn(split)
-                }
                 customElements.define(customTag, customClass) //Define the custom element
                 console.log(`Imported ${customTag} Element`)
             })

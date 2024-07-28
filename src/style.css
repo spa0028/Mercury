@@ -41,7 +41,7 @@ h1, h2 {
     font-size: 6vw;
 }
 
-menu-option {
+bar-menu > div {
     width: 100%;
     height: var(--optionHeight);
     margin: 0px;
@@ -54,12 +54,12 @@ menu-option {
     border-top: calc(var(--borderThickness) / 2) solid var(--themeBorder);
 }
 
-bar-menu > menu-option:first-child {
+bar-menu > div:first-child {
     border-top: var(--borderThickness) solid var(--themeBorder);
     height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
 }
 
-bar-menu > menu-option:last-child {
+bar-menu > div:last-child {
     border-bottom: var(--borderThickness) solid var(--themeBorder);
     height: calc(var(--optionHeight) + (var(--borderThickness) / 2));
 }
@@ -81,15 +81,15 @@ bar-menu > menu-option:last-child {
     top: 0;
 }
 
-menu-option:hover div svg mask rect {
+bar-menu > div:hover div svg mask rect {
     fill: #fff;
 }
 
-menu-option div svg mask path, menu-option div svg mask text {
+bar-menu > div div svg mask path, bar-menu > div div svg mask text {
     fill: #fff;
 }
 
-menu-option:hover div svg mask path, menu-option:hover div svg mask text {
+bar-menu > div:hover div svg mask path, bar-menu > div:hover div svg mask text {
         fill: #000;
 }
 

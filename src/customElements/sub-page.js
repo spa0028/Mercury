@@ -14,6 +14,7 @@
         if (!this.loaded)
         {
             const src = this.getAttribute('src');
+            console.log(src)
             if (src) {
                 fetch(src)
                     .then(response => response.text())
